@@ -4,7 +4,7 @@ ENV TZ=Asia/Tokyo \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer
 
-COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
     apt-get -y install git libicu-dev libzip-dev libonig-dev unzip && \
@@ -13,7 +13,7 @@ RUN apt-get update && \
     mkdir /var/run/php-fpm && \
     docker-php-ext-install intl pdo_mysql zip bcmath
 
-COPY ./php-fpm.d/www.conf /usr/local/etc/php-fpm.d/www.conf
+COPY ./php-fpm.d/zzz-www.conf /usr/local/etc/php-fpm.d/zzz-www.conf
 COPY ./php.ini /usr/local/etc/php/php.ini
 
 WORKDIR /work/src

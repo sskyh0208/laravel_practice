@@ -1,10 +1,10 @@
-FROM php:8.2-fpm-buster
+FROM php:8.2-fpm
 
 ENV TZ=Asia/Tokyo \
     COMPOSER_ALLOW_SUPERUSER=1 \
     COMPOSER_HOME=/composer
 
-COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2.5 /usr/bin/composer /usr/bin/composer
 
 RUN apt-get update && \
     apt-get -y install git libicu-dev libzip-dev libonig-dev unzip && \

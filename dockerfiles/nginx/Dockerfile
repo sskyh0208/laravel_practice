@@ -1,4 +1,4 @@
-FROM node:20-alpine as node
+FROM node:18-alpine as node
 FROM nginx:1.25-alpine
 
 ENV TZ=Asia/Tokyo

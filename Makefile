@@ -11,7 +11,7 @@ create-project:
 	mkdir -p src
 	docker compose build
 	docker compose up -d
-	docker compose exec app composer create-project --prefer-dist "laravel/laravel=9.*" .
+	docker compose exec app composer create-project --prefer-dist "laravel/laravel=10.*" .
 	docker compose exec app composer update
 	docker compose exec app cp .env.example .env
 	docker compose exec app php artisan key:generate
@@ -26,6 +26,8 @@ up:
 	docker compose up -d
 build:
 	docker compose build
+rebuild:
+	docker compose up -d --build
 down:
 	docker compose down --remove-orphans
 logs:

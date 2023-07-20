@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\ContactFormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,24 @@ use App\Http\Controllers\TestController;
 */
 
 Route::get('tests/test', [ TestController::class, 'index' ]);
+
+// Route::resource('contacts', ContactFormController::class);
+
+// Route::get('contancts', [ContactFormController::class, 'index'])->name('contacts.index');
+
+Route::prefix('contacts')
+    ->middleware(['auth'])
+    ->name('contacts.')
+    ->controller(ContactFormController::class)
+    ->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{id}', 'show')->name('show');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::post('/{id}', 'update')->name('update');
+        Route::post('/{id}/destroy', 'destroy')->name('destroy');
+    });
 
 Route::get('/', function () {
     return view('welcome');
